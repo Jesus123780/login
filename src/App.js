@@ -6,16 +6,6 @@ import './polyfills.js';
 
 function App() {
   // Genera un token con un tiempo de expiración de 1 hora
-//     const token = jwt.sign({ username: 'usuario123' }, 'mi_clave_secreta', { expiresIn: '1h' });
-//   // Muestra el token en la consola del navegador
-// console.log(token);
-
-useEffect(() => {
-  fetch('https://backend-login-puce.vercel.app/')
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.error(error));
-}, [])
 
 const handleLogin = (event) => {
   event.preventDefault();
@@ -27,7 +17,10 @@ const handleLogin = (event) => {
 
   fetch('https://backend-login-puce.vercel.app/', requestOptions)
     .then(response => response.json())
-    .then(data => console.log(data))
+    .then(data => {
+      window.localStorage.setItem('session', data.token)
+      console.log(data)
+    })
     .catch(error => console.error(error));
   }
 
